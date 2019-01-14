@@ -25,7 +25,11 @@ function downloadImageByURL(url, filePath) {
 }
 
 
-getRepoContributors("jquery", "jquery", function(err, result) {
+var repoOwner = process.argv[2];
+var repoName = process.argv[3];
+
+
+getRepoContributors(repoOwner, repoName, function(err, result) {
   console.log("Errors:", err);
   //console.log("Result:", result);
   var contributors = JSON.parse(result);
