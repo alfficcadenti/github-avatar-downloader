@@ -11,9 +11,9 @@ console.log('Welcome to the GitHub Avatar Downloader!');
 if (repoName != undefined && repoOwner != undefined) {
   gitFunc.getRepoContributors(repoOwner, repoName, function(err, contibutors) {
     contibutors.forEach(function(contrib) {
-      var file_path = downloadDir + contrib.login + ".jpg";
+      var fileName = contrib.login + ".jpg";
       var url = contrib.avatar_url;
-      gitFunc.downloadImageByURL(url, file_path);
+      gitFunc.downloadImageByURL(url, downloadDir, fileName);
     });
 
   });

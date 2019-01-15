@@ -25,14 +25,24 @@ module.exports = {
     });
   },
 
-  downloadImageByURL: function (url, filePath) {
-    request.get(url)
+  downloadImageByURL: function (url, directory, fileName) {
+    var filePath = directory + fileName;
+    if (!fs.statSync(directory).isDirectory()) {
+      fs.mkdir(directory, function (err) {
+        if (err) {
+            console.log('failed to create directory', err);
+        }
+      });
+    }
+    else {
+        request.get(url)
       .on('error', function (err) {
         console.log("Error!!!");
       })
       .on('response', function (response) {
         console.log("Response Message", response.statusMessage, response.headers['content-type']);
       })
-      .pipe(fs.createWriteStream(filePath))
-  ;}
+      .pipe(fs.createWriteStream(filePath));
+    };
+  }
 }
